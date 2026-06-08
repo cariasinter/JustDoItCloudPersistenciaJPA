@@ -26,7 +26,7 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
       AND t.deadline >= CURRENT_DATE
     ORDER BY t.deadline ASC
     """)
-    List<Task> findTop5UpcomingByUserAndStatus(@Param("userId") Long userId,
+    List<Task> findUpcomingByUserAndStatus(@Param("userId") Long userId,
                                                @Param("status") Task.Status status,
                                                Pageable pageable);
 
