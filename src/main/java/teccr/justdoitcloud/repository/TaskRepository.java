@@ -13,12 +13,6 @@ import java.util.List;
  */
 public interface TaskRepository extends CrudRepository<Task, Long> {
 
-    /**
-     * Return the list of tasks for a given username. If user doesn't exist, return empty list.
-     */
-    List<Task> findByUserId(Long userId);
-
-
     @Query("""
     SELECT t FROM Task t
     WHERE t.userId = :userId

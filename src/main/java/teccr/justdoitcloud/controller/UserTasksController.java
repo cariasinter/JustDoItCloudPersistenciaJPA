@@ -31,12 +31,6 @@ public class UserTasksController {
         formTask.setDescription("");
         formTask.setStatus(Task.Status.INPROGRESS);
         model.addAttribute("newTask", formTask);
-        // Retrieve user tasks and add to user object in session
-        User user = (User) model.getAttribute("user");
-        if (user != null) {
-            user.setTasks(taskService.getTasksForUser(user));
-        }
-
         return "usertasks";
     }
 

@@ -5,8 +5,6 @@ import teccr.justdoitcloud.data.Task;
 import teccr.justdoitcloud.data.User;
 import teccr.justdoitcloud.repository.TaskRepository;
 
-import java.util.List;
-
 @Service
 public class TaskService {
 
@@ -16,12 +14,9 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getTasksForUser(User user) {
-        return taskRepository.findByUserId(user.getId());
-    }
-
     public void addTaskToUser(User user, Task task) {
         task.setUserId(user.getId());
-        taskRepository.save(task);
+        Task savedTask = taskRepository.save(task);
+        user.getTasks().add(savedTask);
     }
 }

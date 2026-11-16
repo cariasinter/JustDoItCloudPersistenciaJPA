@@ -1,10 +1,13 @@
 package teccr.justdoitcloud.data;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,17 +24,16 @@ public class User {
     private String email;
     @Enumerated(EnumType.STRING)
     private Type type;
-    @Transient
-    private List<Task> tasks;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Task> tasks = new ArrayList<>();
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public enum Type {
         ADMIN,
         REGULAR
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
 }
